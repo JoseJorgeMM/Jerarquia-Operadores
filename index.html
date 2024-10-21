@@ -1,0 +1,548 @@
+<html><head><base href="https://interactive-math.edu/hierarchy-of-operations/" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jerarquía de Operaciones Matemáticas</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+<link rel="preload" href="https://example.com/cartoon-astronaut.png" as="image">
+<style>
+  :root {
+    --primary-color: #4a90e2;
+    --secondary-color: #f39c12;
+    --background-color: #f4f4f4;
+    --text-color: #333;
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url('https://example.com/universe-background.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .star {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+    animation: twinkle 2s infinite;
+  }
+
+  @keyframes twinkle {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @keyframes float-astronaut {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+  }
+
+  .astronaut {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    background-image: url('https://example.com/astronaut.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .cartoon-astronaut {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    background-image: url('https://example.com/cartoon-astronaut.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: float-astronaut 6s ease-in-out infinite;
+    z-index: 10;
+  }
+
+  .astronaut:nth-child(1) { top: 10%; left: 5%; }
+  .astronaut:nth-child(2) { top: 30%; right: 10%; animation-delay: 2s; }
+  .astronaut:nth-child(3) { bottom: 15%; left: 15%; }
+
+  .signature-mark {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 24px;
+    z-index: 1000;
+    animation: colorChange 5s infinite;
+  }
+
+  @keyframes colorChange {
+    0% { color: #ff0000; }
+    25% { color: #00ff00; }
+    50% { color: #0000ff; }
+    75% { color: #ffff00; }
+    100% { color: #ff0000; }
+  }
+
+  header {
+    background-color: rgba(74, 144, 226, 0.9);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  nav {
+    background-color: rgba(243, 156, 18, 0.9);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  main {
+    flex-grow: 1;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .content-section {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  h2 {
+    color: var(--primary-color);
+  }
+
+  .example {
+    background-color: #e8f4fd;
+    border-left: 4px solid var(--primary-color);
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .exercise {
+    background-color: #fff9e6;
+    border: 2px solid var(--secondary-color);
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  #generate-exercise {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  #generate-exercise:hover {
+    background-color: #e67e22;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .interactive-example {
+    background-color: #e0f7fa;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+  }
+
+  .interactive-example button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0.5rem;
+  }
+
+  .step {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .step.visible {
+    opacity: 1;
+  }
+
+  .fun-fact {
+    background-color: #fff59d;
+    border-left: 4px solid #ffd54f;
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .sqrt {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .sqrt-symbol {
+    font-size: 1.2em;
+    position: relative;
+  }
+
+  .sqrt-symbol::before {
+    content: "√";
+  }
+
+  .sqrt-symbol::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -2px;
+    width: calc(100% + 2px);
+    border-top: 1px solid currentColor;
+  }
+
+  .sqrt-content {
+    border-top: 1px solid currentColor;
+    padding: 0 3px;
+    margin-left: 0.2em;
+  }
+
+  .fraction {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+  }
+  .numerator, .denominator {
+    display: block;
+  }
+  .numerator {
+    border-bottom: 1px solid currentColor;
+  }
+
+  footer {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 2rem;
+  }
+
+  .einstein-quote {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .einstein-quote img {
+    border-radius: 50%;
+    margin-right: 1rem;
+  }
+
+  .einstein-quote blockquote {
+    font-style: italic;
+    max-width: 600px;
+    font-weight: bold;
+  }
+
+  sup {
+    font-size: 0.6em;
+    vertical-align: super;
+  }
+</style>
+</head>
+<body>
+  <div class="signature-mark">Profesor Jose Jorge Muñoz M.</div>
+  <div class="astronaut"></div>
+  <div class="astronaut"></div>
+  <div class="astronaut"></div>
+  <div class="cartoon-astronaut"></div>
+  <div class="cartoon-astronaut"></div>
+  <div class="cartoon-astronaut"></div>
+  <div class="cartoon-astronaut"></div>
+  <div class="cartoon-astronaut"></div>
+  <div class="stars"></div>
+  <header>
+    <h1>Jerarquía de Operaciones Matemáticas</h1>
+  </header>
+
+  <nav>
+    <button class="nav-button" onclick="showContent('learn')">Aprender</button>
+    <button class="nav-button" onclick="showContent('practice')">Practicar</button>
+  </nav>
+
+  <main>
+    <section id="learn-content" class="content-section">
+      <h2>Jerarquía de Operaciones: ¡PEMDAS al rescate!</h2>
+      <p>¿Alguna vez te has preguntado en qué orden resolver una expresión matemática compleja? ¡No temas! PEMDAS viene al rescate. PEMDAS es un acrónimo que nos ayuda a recordar el orden correcto de las operaciones:</p>
+
+      <ul>
+        <li><strong>P</strong>aréntesis</li>
+        <li><strong>E</strong>xponentes (incluye potencias y raíces)</li>
+        <li><strong>M</strong>ultiplicación y <strong>D</strong>ivisión (de izquierda a derecha)</li>
+        <li><strong>A</strong>dición (suma) y <strong>S</strong>ustracción (resta) (de izquierda a derecha)</li>
+      </ul>
+
+      <p>Vamos a explorar cada uno de estos pasos con ejemplos divertidos y interactivos.</p>
+
+      <div class="example">
+        <h3>1. Paréntesis: Los superhéroes de las matemáticas</h3>
+        <p>Los paréntesis son como superhéroes: siempre actúan primero para salvar el día (o la ecuación). Todo lo que esté dentro de los paréntesis se resuelve antes que nada.</p>
+        <p>Ejemplo: 2 + (3 × 4) - 1 = 2 + 12 - 1 = 14 - 1 = 13</p>
+        <p>¿Qué pasaría si no tuviéramos paréntesis? 2 + 3 × 4 - 1 = 2 + 12 - 1 = 13</p>
+        <p>¡El resultado es el mismo! Pero, ¿y si cambiamos la posición de los paréntesis?</p>
+        <p>(2 + 3) × 4 - 1 = 5 × 4 - 1 = 20 - 1 = 19</p>
+        <p>¡Ahora sí que cambia! Los paréntesis nos permiten controlar el orden de las operaciones.</p>
+      </div>
+
+      <div class="interactive-example">
+        <h4>Ejemplo interactivo: La magia de los paréntesis</h4>
+        <p>Expresión: (4 + 2) × 3 - 5 ÷ (1 + 4)</p>
+        <button onclick="showStep('parenthesis1')">Resolver primer paréntesis</button>
+        <button onclick="showStep('parenthesis2')">Resolver segundo paréntesis</button>
+        <button onclick="showStep('multiply')">Multiplicar</button>
+        <button onclick="showStep('divide')">Dividir</button>
+        <button onclick="showStep('subtract')">Restar</button>
+        <div id="parenthesis1" class="step">6 × 3 - 5 ÷ (1 + 4)</div>
+        <div id="parenthesis2" class="step">6 × 3 - 5 ÷ 5</div>
+        <div id="multiply" class="step">18 - 5 ÷ 5</div>
+        <div id="divide" class="step">18 - 1</div>
+        <div id="subtract" class="step">17</div>
+      </div>
+
+      <div class="example">
+        <h3>2. Exponentes: Potencias y raíces, ¡el dúo dinámico!</h3>
+        <p>Después de los paréntesis, es el turno de los exponentes. Esto incluye tanto las potencias (números elevados a otros números) como las raíces (la operación inversa de la potencia).</p>
+        <p>Ejemplo de potencia: 2<sup>3</sup> + 4 = 8 + 4 = 12</p>
+        <p>Ejemplo de raíz: <span class="sqrt"><span class="sqrt-symbol"></span><span class="sqrt-content">16</span></span> + 3 = 4 + 3 = 7</p>
+        <p>Ejemplo combinado: 2<sup>3</sup> + <span class="sqrt"><span class="sqrt-symbol"></span><span class="sqrt-content">16</span></span> = 8 + 4 = 12</p>
+      </div>
+
+      <div class="fun-fact">
+        <h4>¡Dato curioso!</h4>
+        <p>¿Sabías que cualquier número elevado a la potencia 0 es igual a 1? Por ejemplo, 5<sup>0</sup> = 1, 1000<sup>0</sup> = 1, incluso 0<sup>0</sup> = 1 (aunque este último es un caso especial en matemáticas avanzadas). ¡Es como si el 0 tuviera superpoderes para convertir cualquier número en 1!</p>
+      </div>
+
+      <div class="example">
+        <h3>3. Multiplicación y División: Los gemelos inseparables</h3>
+        <p>La multiplicación y la división tienen la misma prioridad. Cuando nos encontramos con estas operaciones, las resolvemos de izquierda a derecha.</p>
+        <p>Ejemplo: 6 ÷ 2 × 3 = 3 × 3 = 9</p>
+        <p>Pero cuidado, si cambiamos el orden:</p>
+        <p>6 × 2 ÷ 3 = 12 ÷ 3 = 4</p>
+        <p>¡El resultado es diferente! Por eso es importante resolver de izquierda a derecha.</p>
+      </div>
+
+      <div class="interactive-example">
+        <h4>Ejemplo interactivo: La carrera de la multiplicación y la división</h4>
+        <p>Expresión: 24 ÷ 4 × 2 ÷ 3 × 6</p>
+        <button onclick="showStep('mult-div1')">Primer paso</button>
+        <button onclick="showStep('mult-div2')">Segundo paso</button>
+        <button onclick="showStep('mult-div3')">Tercer paso</button>
+        <button onclick="showStep('mult-div4')">Resultado final</button>
+        <div id="mult-div1" class="step">6 × 2 ÷ 3 × 6</div>
+        <div id="mult-div2" class="step">12 ÷ 3 × 6</div>
+        <div id="mult-div3" class="step">4 × 6</div>
+        <div id="mult-div4" class="step">24</div>
+      </div>
+
+      <div class="example">
+        <h3>4. Suma y Resta: Los últimos, pero no menos importantes</h3>
+        <p>Finalmente, llegamos a la suma y la resta. Al igual que con la multiplicación y la división, estas operaciones se realizan de izquierda a derecha.</p>
+        <p>Ejemplo: 10 - 5 + 8 - 3 = 5 + 8 - 3 = 13 - 3 = 10</p>
+      </div>
+
+      <div class="fun-fact">
+        <h4>¡Dato curioso!</h4>
+        <p>La suma y la resta son operaciones tan antiguas que se han encontrado evidencias de su uso en civilizaciones que existieron hace más de 5000 años. ¡Imagina a un estudiante babilónico haciendo sus deberes de matemáticas en una tablilla de arcilla!</p>
+      </div>
+
+      <p>Recuerda, PEMDAS es tu amigo. Con práctica, resolver expresiones complejas será tan fácil como contar del 1 al 10. ¡Sigue practicando y pronto serás un maestro de la jerarquía de operaciones!</p>
+    </section>
+
+    <section id="practice-content" class="content-section hidden">
+      <h2>Ejercicios de Práctica</h2>
+      <p>¡Es hora de poner a prueba tus habilidades! Resuelve estos ejercicios aleatorios sobre la jerarquía de operaciones.</p>
+      <div class="exercise">
+        <p id="exercise-question"></p>
+        <button id="generate-exercise">Generar nuevo ejercicio</button>
+      </div>
+    </section>
+
+    <footer>
+      <div class="einstein-quote">
+        <img src="https://example.com/einstein-tongue.jpg" alt="Albert Einstein sacando la lengua" width="150" height="150">
+        <blockquote>
+          "La educación es lo que queda después de olvidar lo que se ha aprendido en la escuela." - Albert Einstein
+        </blockquote>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    function showContent(section) {
+      const learnContent = document.getElementById('learn-content');
+      const practiceContent = document.getElementById('practice-content');
+
+      if (section === 'learn') {
+        learnContent.classList.remove('hidden');
+        learnContent.classList.add('fade-in');
+        practiceContent.classList.add('hidden');
+      } else {
+        practiceContent.classList.remove('hidden');
+        practiceContent.classList.add('fade-in');
+        learnContent.classList.add('hidden');
+      }
+    }
+
+    function showStep(stepId) {
+      document.getElementById(stepId).classList.add('visible');
+    }
+
+    function createStars() {
+      const starsContainer = document.querySelector('.stars');
+      const starCount = 100;
+
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.width = `${Math.random() * 3}px`;
+        star.style.height = star.style.width;
+        star.style.animationDelay = `${Math.random() * 2}s`;
+        starsContainer.appendChild(star);
+      }
+    }
+
+    function generateRandomNumber(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function generateExercise() {
+      const operations = ['+', '-', '*', '÷', 'pow', '√'];
+      const numOperations = generateRandomNumber(2, 4);
+      let expression = '';
+      let lastOperation = '';
+
+      for (let i = 0; i < numOperations; i++) {
+        if (i > 0) {
+          lastOperation = operations[generateRandomNumber(0, 5)];
+          if (lastOperation === '÷') {
+            if (i > 1 && !/[+\-*÷]$/.test(expression)) {
+              expression += ' * ';
+            }
+            expression += `<span class="fraction"><span class="numerator">${generateRandomNumber(1, 20)}</span><span class="denominator">${generateRandomNumber(1, 20)}</span></span>`;
+          } else if (lastOperation === 'pow') {
+            if (i > 1 && !/[+\-*÷]$/.test(expression)) {
+              expression += ' * ';
+            }
+            const base = generateRandomNumber(1, 10);
+            const exponent = generateRandomNumber(2, 3);
+            expression += `${base}<sup>${exponent}</sup>`;
+          } else if (lastOperation === '√') {
+            if (i > 1 && !/[+\-*÷]$/.test(expression)) {
+              expression += ' * ';
+            }
+            expression += `<span class="sqrt"><span class="sqrt-symbol"></span><span class="sqrt-content">${generateRandomNumber(1, 25)}</span></span>`;
+          } else {
+            expression += ` ${lastOperation} `;
+          }
+        }
+
+        if (lastOperation !== '÷' && lastOperation !== 'pow' && lastOperation !== '√') {
+          expression += generateRandomNumber(1, 20);
+        }
+      }
+
+      if (Math.random() < 0.3) {
+        const parenStart = generateRandomNumber(0, expression.length - 3);
+        const parenEnd = generateRandomNumber(parenStart + 3, expression.length);
+        if (parenStart > 0 && !/[+\-*÷]$/.test(expression.slice(0, parenStart))) {
+          expression = expression.slice(0, parenStart) + ' * ' + '(' + expression.slice(parenStart, parenEnd) + ')' + expression.slice(parenEnd);
+        } else {
+          expression = expression.slice(0, parenStart) + '(' + expression.slice(parenStart, parenEnd) + ')' + expression.slice(parenEnd);
+        }
+      }
+
+      if (/[+\-*÷]$/.test(expression)) {
+        expression += generateRandomNumber(1, 20);
+      }
+
+      document.getElementById('exercise-question').innerHTML = `Resuelve la siguiente expresión:<br><strong>${expression}</strong>`;
+    }
+
+    document.getElementById('generate-exercise').addEventListener('click', generateExercise);
+    createStars();
+    generateExercise();
+    function createCartoonAstronauts() {
+      const astronautCount = 5;
+      const body = document.body;
+
+      for (let i = 0; i < astronautCount; i++) {
+        const astronaut = document.createElement('div');
+        astronaut.classList.add('cartoon-astronaut');
+        astronaut.style.top = `${Math.random() * 100}%`;
+        astronaut.style.left = `${Math.random() * 100}%`;
+        astronaut.style.animationDelay = `${Math.random() * 2}s`;
+        body.appendChild(astronaut);
+      }
+    }
+
+    window.addEventListener('load', createCartoonAstronauts);
+  </script>
+</body>
+</html>
